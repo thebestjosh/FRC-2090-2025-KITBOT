@@ -1,9 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants.Swerve.Mod0;
-import frc.robot.Constants.Swerve.Mod1;
-import frc.robot.Constants.Swerve.Mod2;
-import frc.robot.Constants.Swerve.Mod3;
 import frc.robot.SwerveModule;
 import static frc.robot.Constants.Swerve.*;
 
@@ -53,7 +49,7 @@ public class Swerve extends SubsystemBase {
             this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
-            new HolonomicPathFollowerConfig(4.5, .4, new ReplanningConfig()),
+            new HolonomicPathFollowerConfig(maxSpeed, .4, new ReplanningConfig()),
             () -> {
                 // Boolean supplier that controls when the path will be mirrored for the red alliance
                 // This will flip the path being followed to the red side of the field.

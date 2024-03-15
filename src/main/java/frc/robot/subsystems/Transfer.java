@@ -10,7 +10,7 @@ import static frc.robot.Constants.Transfer.*;
 
 public class Transfer extends SubsystemBase {
     private final TalonSRX transferController;
-    public final DigitalInput transferInput;
+    private final DigitalInput transferInput;
 
 
     public Transfer() {
@@ -39,4 +39,7 @@ public class Transfer extends SubsystemBase {
         transferController.set(ControlMode.PercentOutput, 0);   
     }
 
+    public DigitalInput getDigitalInput() {
+        return transferInput;
+    }
 }

@@ -10,9 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
-import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.ShooterCommand;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -130,7 +128,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putBoolean("Ring Present", ringPresent);
     
-    }
+  }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override

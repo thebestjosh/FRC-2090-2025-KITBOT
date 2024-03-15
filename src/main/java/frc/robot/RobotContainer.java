@@ -58,8 +58,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons; the names should be self-explanitory */
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        controls.hangExtend.whileTrue(new HangCommandUp(s_Hang));
-        controls.hangRetract.whileTrue(new HangCommandDown(s_Hang));
+        controls.hangExtend.whileTrue(s_Hang.runHangUp());
+        controls.hangRetract.whileTrue(s_Hang.runHangDown());
         controls.hangNoLimits.onTrue(new InstantCommand(() -> s_Hang.removeHangLimits()));
 
 //        controls.hangExtend.whileTrue(new Hang(() -> s_Hang.runHang(8));
@@ -74,11 +74,13 @@ public class RobotContainer {
             () -> s_Transfer.reverseTransfer(), 
             () -> s_Transfer.stopTransfer()
             ));
-        controls.activateShooter.whileTrue(new ShooterCommand(s_Shooter, s_Transfer));
+        controls.activateShooter.whileTrue(new StartEndCommand(
+            () -> s_Shooter.runShooter(), 
+            () -> s_Shooter.stopShooter()));
         // controls.stopShooter.onTrue(new InstantCommand(() -> s_Shooter.stopShooter()));
         //TODO: test auto intake (collection but no transfer)
         controls.runIntake.onTrue(new IntakeCommand(s_Intake));
-        controls.autoTransfer.onTrue(new TransferCommand(s_Transfer, s_Intake));
+        controls.autoTransfer.onTrue(new MoveToTransfer(s_Transfer, s_Intake));
         
         // controls.reverseIntake.onTrue(new InstantCommand(() -> s_Intake.reverseIntake()));
         // controls.toggleIntake.onTrue(new InstantCommand(() -> s_Intake.toggleIntake()));
