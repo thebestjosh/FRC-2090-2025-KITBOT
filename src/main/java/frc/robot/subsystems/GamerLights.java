@@ -58,11 +58,16 @@ public class GamerLights extends SubsystemBase {
 
     // Method to set the button light color (strobe white)
     public void ampLight() {
-        blinkin.set(-0.05); // Strobe white color value
+        blinkin.set(-0.05); // strobe white color
     }
 
     // Method to set the button light color (strobe gold)
     public void coopertitionLight() {
          blinkin.set(-0.07); // strobe gold color
     }
+
+    // Method to set the light color (solid green)
+    public void readyToShootLight() {
+        blinkin.set(0.77); // solid green color
+   }
 }

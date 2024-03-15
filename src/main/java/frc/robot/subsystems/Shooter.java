@@ -17,33 +17,23 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.Shooter.*;
-import frc.robot.subsystems.GamerLights.*;
-
 
 public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
-
-    // private Spark blinkin = new Spark(0);
+    private double velocity = 0;
+    private double spunUpVelocity = 999;
 
     public Shooter() {
         shooterControllerL = new TalonSRX(leftMotorID); 
         shooterControllerR = new TalonSRX(rightMotorID); 
     }
 
-    public void shooterGamerLight() {
-        double velocity = shooterControllerL.getActiveTrajectoryVelocity();
-
-        // if (velocity>300) {
-        //     blinkin.set(0.77);
-        // }
-    }
-
     @Override
     public void periodic(){
         SmartDashboard.putNumber("Shooter Speed", maxSpeed);
         SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
-        shooterGamerLight();
+        velocity = shooterControllerL.getActiveTrajectoryVelocity();
     }
 
 
@@ -56,6 +46,14 @@ public class Shooter extends SubsystemBase {
     public void stopShooter() {
         shooterControllerL.set(ControlMode.PercentOutput, 0);
         shooterControllerR.set(ControlMode.PercentOutput, 0);
+    }
+
+    // checks if shooter is ready
+    public boolean shooterSpunUp() {
+        if (velocity >= spunUpVelocity)
+            return true;
+
+        return false;
     }
 }
 
