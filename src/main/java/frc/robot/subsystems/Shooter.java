@@ -21,7 +21,7 @@ import static frc.robot.Constants.Shooter.*;
 public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
-    private double velocity = 0;
+    private double velocity;
     private double spunUpVelocity = 999;
 
     public Shooter() {
@@ -31,9 +31,10 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic(){
+        velocity = shooterControllerL.getActiveTrajectoryVelocity();
         SmartDashboard.putNumber("Shooter Speed", maxSpeed);
         SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
-        velocity = shooterControllerL.getActiveTrajectoryVelocity();
+        checkGamerLight();
     }
 
 
@@ -48,12 +49,23 @@ public class Shooter extends SubsystemBase {
         shooterControllerR.set(ControlMode.PercentOutput, 0);
     }
 
-    // checks if shooter is ready
+    // pretty sure this does the same thing as shooterSpunUp below
+    public void checkGamerLight() {
+        // if (velocity>300) {
+        //     blinkin.set(0.77);
+        // }
+    }
+
+    // checks if shooter is ready; pretty sure this is the same as checkGamerLight
     public boolean shooterSpunUp() {
         if (velocity >= spunUpVelocity)
             return true;
 
         return false;
+    }
+
+    public double getVelocity() {
+        return velocity;
     }
 }
 

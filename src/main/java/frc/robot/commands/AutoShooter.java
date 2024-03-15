@@ -4,39 +4,45 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Transfer;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class HangCommandDown extends Command {
+public class AutoShooter extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Hang m_subsystem;
+  private final Shooter m_subsystem;
+  private final Transfer t_subsystem;
 
   /**
-   * 
+   * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HangCommandDown(Hang subsystem) {
-    m_subsystem = subsystem;
+  public AutoShooter(Shooter shooter, Transfer transfer) {
+    m_subsystem = shooter;
+    t_subsystem = transfer;
+    
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(shooter, transfer);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_subsystem.runShooter();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {  
-    m_subsystem.runHang(1);
+  public void execute() {
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.stopHang();
+    m_subsystem.stopShooter();
   }
 
   // Returns true when the command should end.

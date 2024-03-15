@@ -16,7 +16,7 @@ public class IntakeCommand extends Command {
     // @param subsystem
     public IntakeCommand(Intake subsystem) {
         m_subsytem = subsystem;
-        input = m_subsytem.getInput();
+        input = m_subsytem.getDigitalInput();
         intakePosition = IntakeState.Deactivated;
 
         addRequirements(subsystem);
@@ -24,8 +24,17 @@ public class IntakeCommand extends Command {
 
 
     @Override
-    public void initialize() {
-        m_subsytem.runIntake();
+    public void initialize() {}
+
+    @Override
+    public void execute() {
+        if (!input.get() && intakePosition == IntakeState.Deactivated) {
+            m_subsytem.runIntake();
+            intakePosition = IntakeState.Activated;
+        } else if (input.get() && intakePosition == IntakeState.Activated) {
+            m_subsytem.reverseIntake();
+            intakePosition = IntakeState.Deactivated;
+        }
     }
 
     @Override 

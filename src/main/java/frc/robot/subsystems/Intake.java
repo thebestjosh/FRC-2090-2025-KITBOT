@@ -61,7 +61,7 @@ public class Intake extends SubsystemBase {
         intakeController.set(ControlMode.PercentOutput, 0);
     }
 
-    public DigitalInput getInput() {
+    public DigitalInput getDigitalInput() {
         return input;
     }
 

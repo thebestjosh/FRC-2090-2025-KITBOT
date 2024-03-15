@@ -18,12 +18,12 @@ public class DriveControls {
     public final JoystickButton hangNoLimits = new JoystickButton(joystick1, 9);
     public final JoystickButton hangRetract = new JoystickButton(joystick1, 10);
     public final JoystickButton hangExtend = new JoystickButton(joystick1, 11);
-    // public final JoystickButton stopShooter = new JoystickButton(joystick2, 8);
     public final JoystickButton requestAmplification = new JoystickButton(joystick2, 3);
     public final JoystickButton toggleIntake = new JoystickButton(joystick2, 4);
     public final JoystickButton requestCoopertition = new JoystickButton(joystick2, 5);
     public final JoystickButton runIntake = new JoystickButton(joystick2, 6);
     public final JoystickButton reverseIntake = new JoystickButton(joystick2, 7);
+    // public final JoystickButton stopShooter = new JoystickButton(joystick2, 8);
     public final JoystickButton activateShooter = new JoystickButton(joystick2, 9);
     public final JoystickButton reverseTransfer = new JoystickButton(joystick2, 10);
     public final JoystickButton runTransfer = new JoystickButton(joystick2, 11);    
