@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 
-import frc.robot.Constants.Swerve.IntakeState;
+import frc.robot.Constants.Intake.*;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Transfer;
@@ -21,7 +21,7 @@ public class TransferCommand extends Command {
   private final Transfer m_subsystem;
   private final Intake i_subsystem;
   private final DigitalInput transfer_command_input;
-  private final DigitalInput transfer_stop_Input;
+  private final DigitalInput transfer_stop_input;
   private IntakeState intakePosition;
 
 
@@ -34,8 +34,8 @@ public class TransferCommand extends Command {
     m_subsystem = subsystem;
     i_subsystem = intakeSystem;
     intakePosition = IntakeState.Deactivated;
-    transfer_command_input = intakeSystem.input;
-    transfer_stop_Input = subsystem.transferInput;
+    transfer_command_input = i_subsystem.getInput();
+    transfer_stop_input = subsystem.transferInput;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }

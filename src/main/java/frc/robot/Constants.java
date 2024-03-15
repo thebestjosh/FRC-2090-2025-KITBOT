@@ -85,12 +85,6 @@ public final class Constants {
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
         public static final NeutralModeValue driveNeutralMode = NeutralModeValue.Brake;
-
-        /*intake states (wip) */
-        public enum IntakeState{
-            Deactivated,
-            Activated,
-        }
         
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
@@ -151,6 +145,12 @@ public final class Constants {
         public static final int motorID = 91; //TODO: change to correct port #
 
         public static final double maxSpeed = .2;
+
+        /*intake states (wip) */
+        public enum IntakeState{
+            Deactivated,
+            Activated,
+        }
     }
 
     public static final class Hang {

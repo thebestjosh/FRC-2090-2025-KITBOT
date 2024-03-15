@@ -6,10 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.Swerve.IntakeState;
 
 import static frc.robot.Constants.Intake.*;
-
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -23,7 +21,7 @@ public class Intake extends SubsystemBase {
     private final double intakeSpeed;
     private final DoubleSolenoid m_doubleSolenoid;
     private final Compressor m_compressor;
-    public final DigitalInput input;
+    private final DigitalInput input;
 
     public Intake() {
         intakeController = new TalonSRX(motorID);
@@ -33,8 +31,8 @@ public class Intake extends SubsystemBase {
         //TODO: change to correct sensor port
         input = new DigitalInput(1);
         
-        //pressure switch actually turns off the pressurvizer at around 125-130 psi ????
-        //gague might be bad, but it works 
+        //pressure switch actually turns off the pressurizer at around 125-130 psi ????
+        //gauge might be bad, but it works 
 
         m_compressor = new Compressor(PneumaticsModuleType.CTREPCM);
     }
@@ -43,14 +41,17 @@ public class Intake extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Intake Speed", intakeSpeed);
         SmartDashboard.putBoolean("Compressor Running", m_compressor.isEnabled());
-        // SmartDashboard.putBoolean("Intake Full", input.get());
-        
-        
-    } 
+        SmartDashboard.putBoolean("Intake Full", input.get());
+    }
 
     public void runIntake() {
         m_doubleSolenoid.set(DoubleSolenoid.Value.kForward);
         intakeController.set(ControlMode.PercentOutput, intakeSpeed);
+    }
+
+    public void reverseIntake() {
+        intakeController.set(ControlMode.PercentOutput, 0);
+        m_doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void moveToTransfer() {
@@ -61,14 +62,12 @@ public class Intake extends SubsystemBase {
         intakeController.set(ControlMode.PercentOutput, 0);
     }
 
+    public DigitalInput getInput() {
+        return input;
+    }
+
     //i dunno if it works so ill just comment it out for now
     // public void toggleIntake() {
     //     m_doubleSolenoid.toggle();
     // }
-
-
-    public void reverseIntake() {
-        intakeController.set(ControlMode.PercentOutput, 0);
-        m_doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
-    }
 }

@@ -74,7 +74,7 @@ public class RobotContainer {
             () -> s_Transfer.reverseTransfer(), 
             () -> s_Transfer.stopTransfer()
             ));
-        controls.activateShooter.whileTrue(new ShooterCommand(s_Shooter));
+        controls.activateShooter.whileTrue(new ShooterCommand(s_Shooter, s_Transfer));
         // controls.stopShooter.onTrue(new InstantCommand(() -> s_Shooter.stopShooter()));
         //TODO: test auto intake (collection but no transfer)
         controls.runIntake.onTrue(new IntakeCommand(s_Intake));
@@ -107,18 +107,6 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getShooterCommand() {
-        return new ShooterCommand(s_Shooter);
-    }
-
-    public Command getIntakeCommand() {
-        return new IntakeCommand(s_Intake);
-    }
-
-    public Command getTransferCommand() {
-        return new TransferCommand(s_Transfer, s_Intake);
-    }
-
     public Command getAutoRotateCommand() {
         PathPlannerPath path = PathPlannerPath.fromChoreoTrajectory("Rotate");
 
@@ -130,7 +118,6 @@ public class RobotContainer {
         return AutoBuilder.followPath(path);
     }
     public Command getAutoTestCommand() {
-
         return new PathPlannerAuto("New Auto");
     }
     public Command autoCommandC() {
