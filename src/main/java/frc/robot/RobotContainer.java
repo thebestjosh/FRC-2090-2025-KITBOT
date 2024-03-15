@@ -47,6 +47,7 @@ public class RobotContainer {
             )
         );
         configureButtonBindings();
+        configureTriggerBindings();
     }
 
     /**
@@ -102,6 +103,19 @@ public class RobotContainer {
                 () -> controls.robotCentric.getAsBoolean()
             )
         );
+    }
+
+    /**
+    * Use this method to define your trigger->command mappings. Triggers can be created via the
+    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
+    * predicate, or via the named factories in {@link}
+    * 
+    * Normally, configureButtonBindings and configureTriggerBindings are together in a single 
+    * method called configureBindings, but separating them like this makes it easier to 
+    * understand I think.
+    */
+    private void configureTriggerBindings() {
+        s_Shooter.shooterIsSpunUp.whileTrue(new InstantCommand(() -> s_Blinkin.readyToShootLight()));
     }
     
     /**

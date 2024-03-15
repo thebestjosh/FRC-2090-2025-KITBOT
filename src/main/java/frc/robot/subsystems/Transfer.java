@@ -24,16 +24,13 @@ public class Transfer extends SubsystemBase {
         SmartDashboard.putBoolean("Transfer Full", transferInput.get());
     }
 
-
     public void runTransfer() {
         transferController.set(ControlMode.PercentOutput, maxSpeed);
     }
 
-
     public void reverseTransfer() {
         transferController.set(ControlMode.PercentOutput, -maxSpeed);
     }
-
 
     public void stopTransfer() {
         transferController.set(ControlMode.PercentOutput, 0);   

@@ -22,7 +22,8 @@ public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
     private double velocity;
-    private double spunUpVelocity = 999;
+    private double spunUpVelocity = 999; //TODO: find correct velocity and do dimensional analysis
+    public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp());
 
     public Shooter() {
         shooterControllerL = new TalonSRX(leftMotorID); 
@@ -34,7 +35,6 @@ public class Shooter extends SubsystemBase {
         velocity = shooterControllerL.getActiveTrajectoryVelocity();
         SmartDashboard.putNumber("Shooter Speed", maxSpeed);
         SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
-        checkGamerLight();
     }
 
 
@@ -49,14 +49,7 @@ public class Shooter extends SubsystemBase {
         shooterControllerR.set(ControlMode.PercentOutput, 0);
     }
 
-    // pretty sure this does the same thing as shooterSpunUp below
-    public void checkGamerLight() {
-        // if (velocity>300) {
-        //     blinkin.set(0.77);
-        // }
-    }
-
-    // checks if shooter is ready; pretty sure this is the same as checkGamerLight
+    // checks if shooter is ready
     public boolean shooterSpunUp() {
         if (velocity >= spunUpVelocity)
             return true;

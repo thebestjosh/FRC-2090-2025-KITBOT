@@ -38,7 +38,7 @@ public class GamerLights extends SubsystemBase {
         updateColor(); // Update the color
     }
 
-    // Method to start the timer
+    // Method to "start" the timer
     public void startTimer() {
         lastToggleTime = Timer.getFPGATimestamp(); // Reset the timestamp
     }
@@ -69,5 +69,15 @@ public class GamerLights extends SubsystemBase {
     // Method to set the light color (solid green)
     public void readyToShootLight() {
         blinkin.set(0.77); // solid green color
-   }
+    }
+
+    // Method to set light solid dark green (probably should change this)
+    public void shootingDistanceLight() { blinkin.set(0.75); }
+
+    // Method to set light solid red
+    public void noteInIntakeLight() { blinkin.set(0.61); }
+
+    // Method to set light solid orange
+    public void noteInTransferLight() { blinkin.set(0.65); }
+
 }
