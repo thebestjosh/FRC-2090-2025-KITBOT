@@ -45,9 +45,9 @@ public class GamerLights extends SubsystemBase {
     public void periodic() {
      
         // check if it's time to toggle the color and reset the timer if needed
-        if (Timer.getFPGATimestamp() - lastToggleTime >= 2) { // Check if 2 seconds have elapsed
+        if (Timer.getFPGATimestamp() - lastToggleTime >= 2 && getCurrentCommand() == null) { // Check if 2 seconds have elapsed and nothing else is currently using the lights
             toggleColor(); // Toggle the color
-            startTimer(); // Reset the timer    
+            startTimer(); // Reset the timer
         }
     }
 
