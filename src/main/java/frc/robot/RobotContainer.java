@@ -58,15 +58,38 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons; the names should be self-explanitory */
+        controls.slowMode.whileTrue(
+            new TeleopSwerve(s_Swerve, 
+                () -> controls.getForward() / 3, 
+                () -> controls.getStrafe() / 3, 
+                () -> controls.getRotation() / 3, 
+                () -> controls.robotCentric.getAsBoolean()
+            )
+        );
+        controls.fastMode.whileTrue(
+            new TeleopSwerve(s_Swerve, 
+                () -> controls.getForward(), 
+                () -> controls.getStrafe(), 
+                () -> controls.getRotation(), 
+                () -> controls.robotCentric.getAsBoolean()
+            )
+        );
+        //controls.robotCentric.
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         controls.hangExtend.whileTrue(s_Hang.runHangUp());
         controls.hangRetract.whileTrue(s_Hang.runHangDown());
         controls.hangNoLimits.onTrue(new InstantCommand(() -> s_Hang.removeHangLimits()));
-
-//        controls.hangExtend.whileTrue(new Hang(() -> s_Hang.runHang(8));
-
+        //controls.instantHangExtension.
+        //controls.instantHangRetract.
+        //controls.autoShootSpeaker.
+        //controls.spinUpAmpShooter.
+        //controls.engageIntake.
+        //controls.spinUpTrapShooter.
+        //controls.spinUpSpeakerShooter.
         controls.requestAmplification.whileTrue(new InstantCommand(() -> s_Blinkin.ampLight()));
         controls.requestCoopertition.whileTrue(new InstantCommand(() -> s_Blinkin.coopertitionLight()));
+        // controls.reverseIntake.onTrue(new InstantCommand(() -> s_Intake.reverseIntake()));
+        //controls.ejectNote.
         controls.runTransfer.whileTrue(new StartEndCommand(
             () -> s_Transfer.runTransfer(), 
             () -> s_Transfer.stopTransfer()
@@ -75,34 +98,14 @@ public class RobotContainer {
             () -> s_Transfer.reverseTransfer(), 
             () -> s_Transfer.stopTransfer()
             ));
+
         controls.activateShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooter(), 
             () -> s_Shooter.stopShooter()));
-        // controls.stopShooter.onTrue(new InstantCommand(() -> s_Shooter.stopShooter()));
         //TODO: test auto intake (collection but no transfer)
         controls.runIntake.onTrue(new IntakeCommand(s_Intake));
         controls.autoTransfer.onTrue(new MoveToTransfer(s_Transfer, s_Intake));
-        
-        // controls.reverseIntake.onTrue(new InstantCommand(() -> s_Intake.reverseIntake()));
         // controls.toggleIntake.onTrue(new InstantCommand(() -> s_Intake.toggleIntake()));
-        controls.slowMode.whileTrue(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> controls.getForward() / 3, 
-                () -> controls.getStrafe() / 3, 
-                () -> controls.getRotation() / 3, 
-                () -> controls.robotCentric.getAsBoolean()
-            )
-        );
-        controls.fastMode.whileTrue(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> controls.getForward(), 
-                () -> controls.getStrafe(), 
-                () -> controls.getRotation(), 
-                () -> controls.robotCentric.getAsBoolean()
-            )
-        );
     }
 
     /**
