@@ -13,8 +13,6 @@ public class InstantHangExtension extends Command {
   private final Hang m_subsystem;
 
   /**
-   *
-   *
    * @param subsystem The subsystem used by this command.
    */
   public InstantHangExtension(Hang subsystem) {
@@ -25,24 +23,18 @@ public class InstantHangExtension extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_subsystem.runHang(-1);
-  }
+  public void initialize() { m_subsystem.runHang(-1); }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_subsystem.stopHang();
-  }
+  public void end(boolean interrupted) { m_subsystem.stopHang(); }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_subsystem.leftEncoder <= m_subsystem.upperLimit - 3 && m_subsystem.rightEncoder <= m_subsystem.upperLimit - 3){
+    if (m_subsystem.leftEncoder <= m_subsystem.upperLimit + 3 && m_subsystem.rightEncoder <= m_subsystem.upperLimit + 3){
       return true;
     }
     return false;
   }
-
-
 }
