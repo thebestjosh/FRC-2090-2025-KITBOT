@@ -28,20 +28,23 @@ public class IntakeCommand extends Command {
 
     @Override
     public void execute() {
+        input = m_subsytem.getDigitalInput();
+
         if (!input.get() && intakePosition == IntakeState.Deactivated) {
-            m_subsytem.runIntake();
+            m_subsytem.engageIntake();
             intakePosition = IntakeState.Activated;
-        } else if (input.get() && intakePosition == IntakeState.Activated) {
-            m_subsytem.reverseIntake();
+        }
+        else if (input.get() && intakePosition == IntakeState.Activated) {
+            m_subsytem.disengageIntake();
             intakePosition = IntakeState.Deactivated;
         }
     }
 
     @Override 
     public void end(boolean interrupted) {
-        if (input.get() && intakePosition == IntakeState.Activated)
+        if (intakePosition == IntakeState.Activated)
         {
-            m_subsytem.reverseIntake();
+            m_subsytem.disengageIntake();
             intakePosition = IntakeState.Deactivated;
         }
     }

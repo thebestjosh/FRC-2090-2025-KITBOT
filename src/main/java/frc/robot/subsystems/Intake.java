@@ -21,14 +21,14 @@ public class Intake extends SubsystemBase {
     private final double intakeSpeed;
     private final DoubleSolenoid m_doubleSolenoid;
     private final Compressor m_compressor;
-    private final DigitalInput input;
+    private final DigitalInput breakbeam;
 
     public Intake() {
         intakeController = new TalonSRX(motorID);
         intakeSpeed = maxSpeed;
         m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
         m_doubleSolenoid.set(DoubleSolenoid.Value.kOff);
-        input = new DigitalInput(1); //TODO: change to correct sensor port
+        breakbeam = new DigitalInput(1); //TODO: change to correct sensor port
         
         //pressure switch actually turns off the pressurizer at around 125-130 psi ????
         //gauge might be bad, but it works 
@@ -40,17 +40,37 @@ public class Intake extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Intake Speed", intakeSpeed);
         SmartDashboard.putBoolean("Compressor Running", m_compressor.isEnabled());
-        SmartDashboard.putBoolean("Intake Full", input.get());
+        SmartDashboard.putBoolean("Intake Full", breakbeam.get());
+    }
+
+    public void engageIntake() {
+        extendIntake();
+        runIntake();
+    }
+
+    public void disengageIntake() {
+        retractIntake();
+        stopIntake();
+    }
+
+    public void extendIntake() {
+        m_doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void retractIntake() {
+        m_doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void runIntake() {
-        m_doubleSolenoid.set(DoubleSolenoid.Value.kForward);
         intakeController.set(ControlMode.PercentOutput, intakeSpeed);
     }
 
     public void reverseIntake() {
-        intakeController.set(ControlMode.PercentOutput, 0);
-        m_doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+        intakeController.set(ControlMode.PercentOutput, -intakeSpeed);
+    }
+
+    public void stopIntake() {
+        intakeController.set(ControlMode.PercentOutput, 0);   
     }
 
     public void moveToTransfer() {
@@ -62,7 +82,7 @@ public class Intake extends SubsystemBase {
     }
 
     public DigitalInput getDigitalInput() {
-        return input;
+        return breakbeam;
     }
 
     //i dunno if it works so ill just comment it out for now
