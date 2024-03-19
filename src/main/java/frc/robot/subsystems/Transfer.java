@@ -11,6 +11,7 @@ import static frc.robot.Constants.Transfer.*;
 public class Transfer extends SubsystemBase {
     private final TalonSRX transferController;
     private final DigitalInput transferBreakbeam;
+    public final Trigger noteInTransfer = new Trigger(this::getDigitalInput());
 
 
     public Transfer() {

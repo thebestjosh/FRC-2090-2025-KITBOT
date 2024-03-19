@@ -119,6 +119,8 @@ public class RobotContainer {
     */
     private void configureTriggerBindings() {
         s_Shooter.shooterIsSpunUp.whileTrue(new InstantCommand(() -> s_Blinkin.readyToShootLight()));
+        s_Transfer.noteInTransfer.whileTrue(new InstantCommand(() -> s_Blinkin.noteInTransferLight()));
+        s_Intake.noteIntaked.whileTrue(new InstantCommand(() -> s_Blinkin.noteInIntakeLight()));
     }
     
     /**

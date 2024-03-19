@@ -22,6 +22,7 @@ public class Intake extends SubsystemBase {
     private final DoubleSolenoid m_doubleSolenoid;
     private final Compressor m_compressor;
     private final DigitalInput breakbeam;
+    public final Trigger noteIntaked = new Trigger(this::getDigitalInput());
 
     public Intake() {
         intakeController = new TalonSRX(motorID);

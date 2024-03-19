@@ -53,7 +53,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
+
+    CameraServer.startAutomaticCapture(0);
 
     auto = new SendableChooser<>();
 
@@ -89,9 +90,6 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Green", detectedColor.green);
     // SmartDashboard.putNumber("Blue", detectedColor.blue);
     // SmartDashboard.putNumber("IR", IR);
-
-
-
 
      // if (match.color == kOrangeTarget) {
     //   colorString = "Orange";
