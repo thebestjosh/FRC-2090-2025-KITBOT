@@ -74,6 +74,7 @@ public class RobotContainer {
                 () -> controls.robotCentric.getAsBoolean()
             )
         );
+        controls.reverseShooter.whileTrue(new InstantCommand(() -> s_Shooter.reverseShooter()));
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         controls.hangExtend.whileTrue(s_Hang.runHangUp());
         controls.hangRetract.whileTrue(s_Hang.runHangDown());
@@ -97,6 +98,7 @@ public class RobotContainer {
             () -> s_Transfer.reverseTransfer(), 
             () -> s_Transfer.stopTransfer()
             ));
+
 
         controls.activateShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooter(), 

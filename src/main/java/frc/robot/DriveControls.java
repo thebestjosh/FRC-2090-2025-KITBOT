@@ -13,8 +13,9 @@ public class DriveControls {
     public final JoystickButton slowMode = new JoystickButton(joystick0, 1); // button 1 is the joystick trigger
     public final JoystickButton fastMode = new JoystickButton(joystick0, 2);
     public final JoystickButton robotCentric = new JoystickButton(joystick0, 7);
-    public final JoystickButton zeroGyro = new JoystickButton(joystick0, 10);
+    public final JoystickButton reverseShooter = new JoystickButton(joystick0, 8);
 
+    public final JoystickButton zeroGyro = new JoystickButton(joystick1, 3);
     public final JoystickButton hangExtend = new JoystickButton(joystick1, 6);
     public final JoystickButton hangRetract = new JoystickButton(joystick1, 7);
     public final JoystickButton hangNoLimits = new JoystickButton(joystick1, 8);

@@ -49,6 +49,11 @@ public class Shooter extends SubsystemBase {
         shooterControllerR.set(ControlMode.PercentOutput, 0);
     }
 
+    public void reverseShooter() {
+        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, -maxSpeed);
+    }
+
     // checks if shooter is ready
     public boolean shooterSpunUp() {
         if (velocity >= spunUpVelocity)
