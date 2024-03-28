@@ -6,12 +6,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import static frc.robot.Constants.Transfer.*;
 
 public class Transfer extends SubsystemBase {
     private final TalonSRX transferController;
     private final DigitalInput transferBreakbeam;
-    public final Trigger noteInTransfer = new Trigger(this::getDigitalInput());
+    public final Trigger noteInTransfer = new Trigger(this::getBreakbeam);
 
 
     public Transfer() {
@@ -37,7 +39,7 @@ public class Transfer extends SubsystemBase {
         transferController.set(ControlMode.PercentOutput, 0);   
     }
 
-    public DigitalInput getDigitalInput() {
-        return transferBreakbeam;
+    public boolean getBreakbeam() {
+        return transferBreakbeam.get();
     }
 }

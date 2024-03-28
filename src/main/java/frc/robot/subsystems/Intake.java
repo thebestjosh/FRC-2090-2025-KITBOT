@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.Intake.*;
 
@@ -22,7 +23,7 @@ public class Intake extends SubsystemBase {
     private final DoubleSolenoid m_doubleSolenoid;
     private final Compressor m_compressor;
     private final DigitalInput breakbeam;
-    public final Trigger noteIntaked = new Trigger(this::getDigitalInput());
+    public final Trigger noteIntaked = new Trigger(this::getDigitalInput);
 
     public Intake() {
         intakeController = new TalonSRX(motorID);
@@ -82,8 +83,8 @@ public class Intake extends SubsystemBase {
         intakeController.set(ControlMode.PercentOutput, 0);
     }
 
-    public DigitalInput getDigitalInput() {
-        return breakbeam;
+    public boolean getDigitalInput() {
+        return breakbeam.get();
     }
 
     //i dunno if it works so ill just comment it out for now

@@ -38,6 +38,7 @@ public class DriveControls {
     public final JoystickButton autoTransfer = new JoystickButton(joystick2, 12);
     public final JoystickButton toggleIntake = new JoystickButton(joystick0, 4);
     public final JoystickButton runIntake = new JoystickButton(joystick0, 6);
+    public final JoystickButton activateShooter = new JoystickButton(joystick1, 4);
 
     public double getForward() { return joystick0.getY(); } //Deleted a negative symbol to flip directions
     public double getStrafe() { return joystick0.getX(); } //Deleted a negative symbol to flip directions

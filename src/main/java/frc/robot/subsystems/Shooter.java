@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import static frc.robot.Constants.Shooter.*;
 
 public class Shooter extends SubsystemBase {
@@ -23,7 +25,7 @@ public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerR;
     private double velocity;
     private double spunUpVelocity = 999; //TODO: find correct velocity and do dimensional analysis
-    public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp());
+    public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp);
 
     public Shooter() {
         shooterControllerL = new TalonSRX(leftMotorID); 

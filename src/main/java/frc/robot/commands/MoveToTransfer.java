@@ -20,8 +20,8 @@ public class MoveToTransfer extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Transfer m_subsystem;
     private final Intake i_subsystem;
-    private final DigitalInput transfer_input;
-    private final DigitalInput intake_input;
+    private boolean transfer_input;
+    private boolean intake_input;
     private IntakeState intakePosition;
 
 
@@ -34,7 +34,7 @@ public class MoveToTransfer extends Command {
         m_subsystem = transfer;
         i_subsystem = intake;
         intakePosition = IntakeState.Deactivated;
-        transfer_input = m_subsystem.getDigitalInput();
+        transfer_input = m_subsystem.getBreakbeam();
         intake_input = i_subsystem.getDigitalInput();
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(m_subsystem, i_subsystem);
@@ -45,7 +45,7 @@ public class MoveToTransfer extends Command {
     public void initialize() {
         //m_subsystem.runTransfer();
 
-        if (transfer_input.get() && intakePosition == IntakeState.Deactivated) {
+        if (transfer_input && intakePosition == IntakeState.Deactivated) {
             i_subsystem.moveToTransfer();
             m_subsystem.runTransfer();
         };
