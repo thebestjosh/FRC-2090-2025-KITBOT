@@ -24,7 +24,6 @@ public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
     private double velocity;
-    private double spunUpVelocity = 999; //TODO: find correct velocity and do dimensional analysis
     public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp);
 
     public Shooter() {
@@ -44,7 +43,6 @@ public class Shooter extends SubsystemBase {
         shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, maxSpeed);
     }
-
 
     public void stopShooter() {
         shooterControllerL.set(ControlMode.PercentOutput, 0);

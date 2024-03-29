@@ -81,14 +81,14 @@ public class RobotContainer {
         controls.hangNoLimits.onTrue(new InstantCommand(() -> s_Hang.removeHangLimits()));
         //controls.instantHangExtension.
         //controls.instantHangRetract.
-        //controls.autoShootSpeaker.
+        controls.autoShootSpeaker.whileTrue(new AutoShooter(s_Shooter, s_Transfer));
         //controls.spinUpAmpShooter.
-        //controls.engageIntake.
+        controls.engageIntake.whileTrue(new IntakeCommand(s_Intake));
         //controls.spinUpTrapShooter.
         //controls.spinUpSpeakerShooter.
         controls.requestAmplification.whileTrue(new InstantCommand(() -> s_Blinkin.ampLight()));
         controls.requestCoopertition.whileTrue(new InstantCommand(() -> s_Blinkin.coopertitionLight()));
-        // controls.reverseIntake.onTrue(new InstantCommand(() -> s_Intake.reverseIntake()));
+        controls.reverseIntake.whileTrue(new InstantCommand(() -> s_Intake.reverseIntake()));
         //controls.ejectNote.
         controls.runTransfer.whileTrue(new StartEndCommand(
             () -> s_Transfer.runTransfer(), 
@@ -99,12 +99,11 @@ public class RobotContainer {
             () -> s_Transfer.stopTransfer()
             ));
 
-
+        //Controls not on button map
         controls.activateShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooter(), 
             () -> s_Shooter.stopShooter()));
-        //TODO: test auto intake (collection but no transfer)
-        controls.runIntake.onTrue(new IntakeCommand(s_Intake));
+        controls.runIntake.onTrue(new IntakeCommand(s_Intake)); //TODO: test auto intake (collection but no transfer)
         controls.autoTransfer.onTrue(new MoveToTransfer(s_Transfer, s_Intake));
         // controls.toggleIntake.onTrue(new InstantCommand(() -> s_Intake.toggleIntake()));
     }
