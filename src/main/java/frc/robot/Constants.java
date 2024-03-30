@@ -129,22 +129,22 @@ public final class Constants {
     }
 
     public static final class Shooter {
-        public static final int leftMotorID = 90; // TODO: change to correct port #
-        public static final int rightMotorID = 23; // TODO: change to correct port #
+        public static final int leftMotorID = 21; // TODO: change to correct port #
+        public static final int rightMotorID = 22; // TODO: change to correct port #
 
-        public static final double maxSpeed = .75;
+        public static final double maxSpeed = 1;
     }
     
     public static final class Transfer {
-        public static final int transferMotorID = 22; // TODO: change to correct port #
+        public static final int transferMotorID = 23; // TODO: change to correct port #
 
-        public static final double maxSpeed = .5; //TODO: to change
+        public static final double maxSpeed = .8; //TODO: to change
     }
 
     public static final class Intake {
-        public static final int motorID = 91; //TODO: change to correct port #
+        public static final int motorID = 20; //TODO: change to correct port #
 
-        public static final double maxSpeed = .2;
+        public static final double maxSpeed = .6;
 
         /*intake states (wip) */
         public enum IntakeState{

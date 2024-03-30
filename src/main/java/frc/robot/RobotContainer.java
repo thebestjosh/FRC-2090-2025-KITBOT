@@ -103,9 +103,10 @@ public class RobotContainer {
         controls.activateShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooter(), 
             () -> s_Shooter.stopShooter()));
-        controls.runIntake.onTrue(new IntakeCommand(s_Intake)); //TODO: test auto intake (collection but no transfer)
-        controls.autoTransfer.onTrue(new MoveToTransfer(s_Transfer, s_Intake));
-        // controls.toggleIntake.onTrue(new InstantCommand(() -> s_Intake.toggleIntake()));
+        controls.runIntake.whileTrue(new StartEndCommand(() -> s_Intake.runIntake(), () -> s_Intake.stopIntake())); //TODO: test auto intake (collection but no transfer)
+        //controls.autoTransfer.onTrue(new MoveToTransfer(s_Transfer, s_Intake));
+        controls.extenddIntake.onTrue(new InstantCommand(() -> s_Intake.extendIntake()));
+        controls.retracttIntake.onTrue(new InstantCommand(() -> s_Intake.retractIntake()));
     }
 
     /**

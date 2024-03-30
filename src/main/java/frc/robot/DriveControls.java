@@ -35,8 +35,9 @@ public class DriveControls {
     public final JoystickButton runTransfer = new JoystickButton(joystick2, 11);
     
     // These buttons aren't on the button map doc:
-    public final JoystickButton autoTransfer = new JoystickButton(joystick2, 12);
-    public final JoystickButton toggleIntake = new JoystickButton(joystick0, 4);
+   // public final JoystickButton autoTransfer = new JoystickButton(joystick2, 12);
+    public final JoystickButton extenddIntake = new JoystickButton(joystick1, 5);
+    public final JoystickButton retracttIntake = new JoystickButton(joystick1, 4);
     public final JoystickButton runIntake = new JoystickButton(joystick0, 6);
     public final JoystickButton activateShooter = new JoystickButton(joystick1, 4);
 
