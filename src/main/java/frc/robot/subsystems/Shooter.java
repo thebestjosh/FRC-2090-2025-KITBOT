@@ -23,7 +23,9 @@ import static frc.robot.Constants.Shooter.*;
 public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
-    private double velocity;
+    private double velocityL;
+    private double velocityR;
+    //Set velocity (look into this): https://pro.docs.ctr-electronics.com/en/stable/docs/migration/migration-guide/closed-loop-guide.html
     public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp);
 
     public Shooter() {
@@ -33,9 +35,12 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic(){
-        velocity = shooterControllerL.getActiveTrajectoryVelocity();
+        //getSelectedSensorVelocity returns ticks per 100ms, so we can just convert to rpm w/ dimensional analysis
+        velocityL = shooterControllerL.getSelectedSensorVelocity() / 4096 * 1000 * 60;
+        velocityR = shooterControllerR.getSelectedSensorVelocity() / 4096 * 1000 * 60;
         SmartDashboard.putNumber("Shooter Speed", maxSpeed);
-        SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
+        SmartDashboard.putNumber("Shooter Velocity (Left)", velocityL);
+        SmartDashboard.putNumber("Shooter Velocity (Right)", velocityR);
     }
 
 
@@ -54,6 +59,8 @@ public class Shooter extends SubsystemBase {
         shooterControllerR.set(ControlMode.PercentOutput, -maxSpeed);
     }
 
+    public void runShooterSet
+
     // checks if shooter is ready
     public boolean shooterSpunUp() {
         if (velocity >= spunUpVelocity)
@@ -63,7 +70,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return velocity;
+        return velocityL;
     }
 }
 
