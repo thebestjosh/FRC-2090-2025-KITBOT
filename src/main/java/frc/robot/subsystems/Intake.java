@@ -64,11 +64,11 @@ public class Intake extends SubsystemBase {
     }
 
     public void runIntake() {
-        intakeController.set(ControlMode.PercentOutput, intakeSpeed);
+        intakeController.set(ControlMode.PercentOutput, -intakeSpeed);
     }
 
     public void reverseIntake() {
-        intakeController.set(ControlMode.PercentOutput, -intakeSpeed);
+        intakeController.set(ControlMode.PercentOutput, intakeSpeed);
     }
 
     public void stopIntake() {
@@ -76,7 +76,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void moveToTransfer() {
-        intakeController.set(ControlMode.PercentOutput, intakeSpeed);
+        intakeController.set(ControlMode.PercentOutput, -intakeSpeed);
     }
 
     public void stopMoveToTransfer() {

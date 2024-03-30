@@ -33,14 +33,14 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic(){
-        velocity = shooterControllerL.getActiveTrajectoryVelocity();
+        //velocity = shooterControllerL.getActiveTrajectoryVelocity();
         SmartDashboard.putNumber("Shooter Speed", maxSpeed);
-        SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
+        //SmartDashboard.putNumber("Shooter Velocity", shooterControllerL.getActiveTrajectoryVelocity());
     }
 
 
     public void runShooter() {
-        shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, maxSpeed);
     }
 
@@ -50,14 +50,14 @@ public class Shooter extends SubsystemBase {
     }
 
     public void reverseShooter() {
-        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, -maxSpeed);
     }
 
     // checks if shooter is ready
     public boolean shooterSpunUp() {
-        if (velocity >= spunUpVelocity)
-            return true;
+        // if (velocity >= spunUpVelocity)
+        //     return true;
 
         return false;
     }
