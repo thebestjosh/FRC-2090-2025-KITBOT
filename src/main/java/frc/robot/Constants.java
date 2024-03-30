@@ -21,8 +21,8 @@ public final class Constants {
         COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(21.73); //TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(21.73); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(23);
+        public static final double wheelBase = Units.inchesToMeters(23);
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
@@ -88,7 +88,7 @@ public final class Constants {
         
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { //TODO: This must be tuned to specific robot
+        public static final class Mod0 {
             public static final int driveMotorID = 10;
             public static final int angleMotorID = 14;
             public static final int canCoderID = 1;
@@ -98,7 +98,7 @@ public final class Constants {
         }
 
         /* Front Right Module - Module 1 */
-        public static final class Mod1 { //TODO: This must be tuned to specific robot
+        public static final class Mod1 {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
@@ -108,7 +108,7 @@ public final class Constants {
         }
         
         /* Back Left Module - Module 2 */
-        public static final class Mod2 { //TODO: This must be tuned to specific robot
+        public static final class Mod2 { 
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
@@ -118,7 +118,7 @@ public final class Constants {
         }
 
         /* Back Right Module - Module 3 */
-        public static final class Mod3 { //TODO: This must be tuned to specific robot
+        public static final class Mod3 {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
@@ -129,20 +129,24 @@ public final class Constants {
     }
 
     public static final class Shooter {
-        public static final int leftMotorID = 21; // TODO: change to correct port #
-        public static final int rightMotorID = 22; // TODO: change to correct port #
+        public static final int leftMotorID = 21;
+        public static final int rightMotorID = 22;
 
+        public static final double spunUpVelocity = 999; //TODO: find actual velocity
+        public static final double adjustmentDeadband = 0.1;
+
+        public static final double ejectSpeed = 0.2;
         public static final double maxSpeed = 1;
     }
     
     public static final class Transfer {
-        public static final int transferMotorID = 23; // TODO: change to correct port #
+        public static final int transferMotorID = 23;
 
-        public static final double maxSpeed = .8; //TODO: to change
+        public static final double maxSpeed = .8;
     }
 
     public static final class Intake {
-        public static final int motorID = 20; //TODO: change to correct port #
+        public static final int motorID = 20;
 
         public static final double maxSpeed = .6;
 

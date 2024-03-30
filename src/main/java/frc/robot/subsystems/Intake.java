@@ -23,14 +23,15 @@ public class Intake extends SubsystemBase {
     private final DoubleSolenoid m_doubleSolenoid;
     private final Compressor m_compressor;
     private final DigitalInput breakbeam;
-    public final Trigger noteIntaked = new Trigger(this::getDigitalInput);
+    public final Trigger noteIntaked = new Trigger(this::getBreakbeam);
+    public boolean intakeNoLimits = false;
 
     public Intake() {
         intakeController = new TalonSRX(motorID);
         intakeSpeed = maxSpeed;
         m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
         m_doubleSolenoid.set(DoubleSolenoid.Value.kOff);
-        breakbeam = new DigitalInput(1); //TODO: change to correct sensor port
+        breakbeam = new DigitalInput(1);
         
         //pressure switch actually turns off the pressurizer at around 125-130 psi ????
         //gauge might be bad, but it works 
@@ -83,9 +84,13 @@ public class Intake extends SubsystemBase {
         intakeController.set(ControlMode.PercentOutput, 0);
     }
 
-    public boolean getDigitalInput() {
+    public boolean getBreakbeam() {
         return breakbeam.get();
     }
+
+    public void removeIntakeLimits()  { intakeNoLimits = true;  }
+
+    public void disableCompressor() { m_compressor.disable(); }
 
     //i dunno if it works so ill just comment it out for now
     // public void toggleIntake() {

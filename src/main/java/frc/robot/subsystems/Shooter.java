@@ -8,7 +8,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.util.Color;
-
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -34,7 +34,7 @@ public class Shooter extends SubsystemBase {
     }
 
     @Override
-    public void periodic(){
+    public void periodic() {
         //getSelectedSensorVelocity returns ticks per 100ms, so we can just convert to rpm w/ dimensional analysis
         velocityL = shooterControllerL.getSelectedSensorVelocity() / 4096 * 1000 * 60;
         velocityR = shooterControllerR.getSelectedSensorVelocity() / 4096 * 1000 * 60;
@@ -45,8 +45,13 @@ public class Shooter extends SubsystemBase {
 
 
     public void runShooter() {
-        shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, maxSpeed);
+    }
+
+    public void runShooterEject() {
+        shooterControllerL.set(ControlMode.PercentOutput, -ejectSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, ejectSpeed);
     }
 
     public void stopShooter() {
@@ -55,15 +60,13 @@ public class Shooter extends SubsystemBase {
     }
 
     public void reverseShooter() {
-        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, -maxSpeed);
     }
 
-    public void runShooterSet
-
     // checks if shooter is ready
     public boolean shooterSpunUp() {
-        if (velocity >= spunUpVelocity)
+        if (velocityL >= spunUpVelocity)
             return true;
 
         return false;
@@ -72,5 +75,11 @@ public class Shooter extends SubsystemBase {
     public double getVelocity() {
         return velocityL;
     }
+
+    // public double adjustVelocity(double oldSpeed, DoubleSupplier adjuster)
+    // {
+    //     adjuster = MathUtil.applyDeadband(adjuster.getAsDouble(), adjustmentDeadband);
+    //     return oldSpeed - adjuster; //my head hurts. I'll do this later.
+    // }
 }
 

@@ -14,11 +14,13 @@ public class DriveControls {
     public final JoystickButton fastMode = new JoystickButton(joystick0, 2);
     public final JoystickButton robotCentric = new JoystickButton(joystick0, 7);
     public final JoystickButton reverseShooter = new JoystickButton(joystick0, 8);
+    public final JoystickButton disableCompressor = new JoystickButton(joystick0, 9);
 
     public final JoystickButton zeroGyro = new JoystickButton(joystick1, 3);
     public final JoystickButton hangExtend = new JoystickButton(joystick1, 6);
     public final JoystickButton hangRetract = new JoystickButton(joystick1, 7);
     public final JoystickButton hangNoLimits = new JoystickButton(joystick1, 8);
+    public final JoystickButton breakbeamNoLimits = new JoystickButton(joystick1, 9);
     public final JoystickButton instantHangRetract = new JoystickButton(joystick1, 10);
     public final JoystickButton instantHangExtension = new JoystickButton(joystick1, 11);
 
@@ -35,7 +37,6 @@ public class DriveControls {
     public final JoystickButton runTransfer = new JoystickButton(joystick2, 11);
     
     // These buttons aren't on the button map doc:
-   // public final JoystickButton autoTransfer = new JoystickButton(joystick2, 12);
     public final JoystickButton extenddIntake = new JoystickButton(joystick1, 5);
     public final JoystickButton retracttIntake = new JoystickButton(joystick1, 4);
     public final JoystickButton runIntake = new JoystickButton(joystick0, 6);

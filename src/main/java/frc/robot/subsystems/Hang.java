@@ -45,9 +45,8 @@ public class Hang extends SubsystemBase {
          * only go down if it's too high).
          */
 
-        if (!limits) {
+        if (!limits)
             return;
-        }
         
         boolean atMaxHeight = false;
         boolean atMinHeight = false;

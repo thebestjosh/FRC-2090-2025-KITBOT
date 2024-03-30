@@ -12,13 +12,15 @@ public class IntakeCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Intake m_subsytem;
     private boolean input;
+    private boolean followingRing;
     private IntakeState intakePosition;
 
     // @param subsystem
     public IntakeCommand(Intake subsystem) {
         m_subsytem = subsystem;
-        input = m_subsytem.getDigitalInput();
+        input = m_subsytem.getBreakbeam();
         intakePosition = IntakeState.Deactivated;
+        followingRing = false;
 
         addRequirements(subsystem);
     }
@@ -29,15 +31,24 @@ public class IntakeCommand extends Command {
 
     @Override
     public void execute() {
-        input = m_subsytem.getDigitalInput();
+        input = m_subsytem.getBreakbeam();
 
-        if (!input && intakePosition == IntakeState.Deactivated) {
+        if (m_subsytem.intakeNoLimits)
+            followingRing = false;
+        else if (input)
+            followingRing = true;
+
+        // if the intake is deactivated, extend
+        if (intakePosition == IntakeState.Deactivated) {
             m_subsytem.engageIntake();
             intakePosition = IntakeState.Activated;
         }
-        else if (input && intakePosition == IntakeState.Activated) {
+        // If the intake is empty and extened but it previously had a ring in it, that means the ring passed through to the transfer, so retract
+        // (this is written b/c we don't have a sensor in the transfer to be sure it's in the transfer)
+        else if (!input && intakePosition == IntakeState.Activated && followingRing) {
             m_subsytem.disengageIntake();
             intakePosition = IntakeState.Deactivated;
+            followingRing = false;
         }
     }
 

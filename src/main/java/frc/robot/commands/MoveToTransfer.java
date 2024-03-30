@@ -35,7 +35,7 @@ public class MoveToTransfer extends Command {
         i_subsystem = intake;
         intakePosition = IntakeState.Deactivated;
         transfer_input = m_subsystem.getBreakbeam();
-        intake_input = i_subsystem.getDigitalInput();
+        intake_input = i_subsystem.getBreakbeam();
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(m_subsystem, i_subsystem);
     }
