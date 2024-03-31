@@ -19,8 +19,6 @@ public class Hang extends SubsystemBase {
     private final double hangSpeed;
     public double leftEncoder = 0;
     public double rightEncoder = 0;
-    public double upperLimit = -49; 
-    public double lowerLimit = 0;
     private boolean limits = true;
 
     public Hang() {

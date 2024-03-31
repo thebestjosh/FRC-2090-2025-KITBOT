@@ -164,6 +164,9 @@ public final class Constants {
         public static final int leftHangID = 21;
         public static final int rightHangID = 20;
 
+        public static final double upperLimit = -20; //previously -49
+        public static final double lowerLimit = 0;
+
         public static final double maxSpeed = .4;
     }
 
