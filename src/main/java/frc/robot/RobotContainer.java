@@ -84,10 +84,14 @@ public class RobotContainer {
         controls.instantHangExtension.onTrue(new InstantHangExtension(s_Hang));
         controls.instantHangRetract.onTrue(new InstantHangRetraction(s_Hang));
         controls.autoShootSpeaker.whileTrue(new AutoShooter(s_Shooter, s_Transfer));
-        //controls.spinUpAmpShooter.
+        controls.spinUpAmpShooter.whileTrue(new StartEndCommand(
+            () -> s_Shooter.runShooterAmp(), 
+            () -> s_Shooter.stopShooter()));
         controls.engageIntake.whileTrue(new IntakeCommand(s_Intake));
         //controls.spinUpTrapShooter.
-        //controls.spinUpSpeakerShooter.
+        controls.spinUpSpeakerShooter.whileTrue(new StartEndCommand(
+            () -> s_Shooter.runShooterSpeaker(), 
+            () -> s_Shooter.stopShooter()));
         controls.requestAmplification.whileTrue(new InstantCommand(() -> s_Blinkin.ampLight()));
         controls.requestCoopertition.whileTrue(new InstantCommand(() -> s_Blinkin.coopertitionLight()));
         controls.reverseIntake.whileTrue(new StartEndCommand(

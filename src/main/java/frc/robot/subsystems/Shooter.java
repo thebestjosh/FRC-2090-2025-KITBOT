@@ -54,6 +54,16 @@ public class Shooter extends SubsystemBase {
         shooterControllerR.set(ControlMode.PercentOutput, ejectSpeed);
     }
 
+    public void runShooterAmp() {
+        shooterControllerL.set(ControlMode.PercentOutput, -ampSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, ampSpeed);
+    }
+
+    public void runShooterSpeaker() {
+        shooterControllerL.set(ControlMode.PercentOutput, -speakerSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, speakerSpeed);
+    }
+
     public void stopShooter() {
         shooterControllerL.set(ControlMode.PercentOutput, 0);
         shooterControllerR.set(ControlMode.PercentOutput, 0);
@@ -65,7 +75,7 @@ public class Shooter extends SubsystemBase {
     }
 
     // checks if shooter is ready
-    public boolean shooterSpunUp() {
+    public boolean shooterIsSpunUp() {
         if (velocityL >= spunUpVelocity)
             return true;
 
@@ -76,10 +86,22 @@ public class Shooter extends SubsystemBase {
         return velocityL;
     }
 
-    // public double adjustVelocity(double oldSpeed, DoubleSupplier adjuster)
-    // {
-    //     adjuster = MathUtil.applyDeadband(adjuster.getAsDouble(), adjustmentDeadband);
-    //     return oldSpeed - adjuster; //my head hurts. I'll do this later.
-    // }
+    /**
+     * The goal of this method is to modify the speed by the scalar of the joytick, 
+     * relative to the distance from max/min speed (i.e turning adjuster to max 
+     * (1.00) makes speed = 1 and turning to min (-1.00) makes speed = 0), no 
+     * matter what speed is initially (e.g 0.8).
+     * 
+     * @param oldSpeed the current set speed
+     * @param adjuster the adjustment value
+     * @return the new speed
+     */
+    public double adjustSpeed(double oldSpeed, DoubleSupplier adjuster)
+    {
+        double workingArea;
+        adjuster = MathUtil.applyDeadband(adjuster.getAsDouble(), adjustmentDeadband) * -1;
+        workingArea = adjuster > 0 ? maxSpeed - oldSpeed : oldSpeed;
+        return oldSpeed; //my head hurts. I'll finish this later.
+        //
+    }
 }
-

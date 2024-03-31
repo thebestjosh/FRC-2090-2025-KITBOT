@@ -30,22 +30,23 @@ public class AutoShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.runShooter();
+    m_subsystem.runShooterSpeaker();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if (m_subsystem.shooterIsSpunUp())
-    // {
-    //   t_subsystem.runTransfer();
-    // }
+    if (m_subsystem.shooterIsSpunUp())
+    {
+      t_subsystem.runTransfer();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_subsystem.stopShooter();
+    t_subsystem.stopTransfer();
   }
 
   // Returns true when the command should end.
