@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.Hang;
 
 /** An example command that uses an example subsystem. */
@@ -32,7 +33,7 @@ public class InstantHangExtension extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_subsystem.leftEncoder <= m_subsystem.upperLimit + 3 && m_subsystem.rightEncoder <= m_subsystem.upperLimit + 3){
+    if (m_subsystem.leftEncoder <= Constants.Hang.upperLimit + 3 && m_subsystem.rightEncoder <= Constants.Hang.upperLimit + 3){
       return true;
     }
     return false;

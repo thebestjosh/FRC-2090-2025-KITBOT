@@ -20,13 +20,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.Shooter.*;
 
+import java.util.function.DoubleSupplier;
+
 public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
     private double velocityL;
     private double velocityR;
     //Set velocity (look into this): https://pro.docs.ctr-electronics.com/en/stable/docs/migration/migration-guide/closed-loop-guide.html
-    public final Trigger shooterIsSpunUp = new Trigger(this::shooterSpunUp);
+    public final Trigger shooterIsSpunUp = new Trigger(this::shooterIsSpunUp);
 
     public Shooter() {
         shooterControllerL = new TalonSRX(leftMotorID); 
@@ -96,10 +98,10 @@ public class Shooter extends SubsystemBase {
      * @param adjuster the adjustment value
      * @return the new speed
      */
-    public double adjustSpeed(double oldSpeed, DoubleSupplier adjuster)
+    public double adjustSpeed(double oldSpeed, double adjuster)
     {
         double workingArea;
-        adjuster = MathUtil.applyDeadband(adjuster.getAsDouble(), adjustmentDeadband) * -1;
+        adjuster = MathUtil.applyDeadband(adjuster, adjustmentDeadband) * -1;
         workingArea = adjuster > 0 ? maxSpeed - oldSpeed : oldSpeed;
         return oldSpeed; //my head hurts. I'll finish this later.
         //
