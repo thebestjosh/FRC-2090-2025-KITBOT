@@ -33,8 +33,8 @@ public class Hang extends SubsystemBase {
         rightEncoder = rightHangController.getEncoder().getPosition();
         SmartDashboard.putNumber("Left Hang Current", leftHangController.getOutputCurrent());
         SmartDashboard.putNumber("Right Hang Current", rightHangController.getOutputCurrent());
-        SmartDashboard.putNumber("Left Encoder", leftEncoder);
-        SmartDashboard.putNumber("Right Encoder", rightEncoder);
+        SmartDashboard.putNumber("Left Hang Encoder", leftEncoder);
+        SmartDashboard.putNumber("Right Hang Encoder", rightEncoder);
     }
 
     public void runHang(int input) {    

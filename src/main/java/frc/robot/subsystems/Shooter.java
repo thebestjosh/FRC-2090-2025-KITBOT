@@ -40,7 +40,6 @@ public class Shooter extends SubsystemBase {
         //getSelectedSensorVelocity returns ticks per 100ms, so we can just convert to rpm w/ dimensional analysis
         velocityL = shooterControllerL.getSelectedSensorVelocity() / 4096 * 1000 * 60;
         velocityR = shooterControllerR.getSelectedSensorVelocity() / 4096 * 1000 * 60;
-        SmartDashboard.putNumber("Shooter Speed", maxSpeed);
         SmartDashboard.putNumber("Shooter Velocity (Left)", velocityL);
         SmartDashboard.putNumber("Shooter Velocity (Right)", velocityR);
     }

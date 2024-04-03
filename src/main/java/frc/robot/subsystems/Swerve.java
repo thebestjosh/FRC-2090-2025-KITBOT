@@ -163,7 +163,7 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
 
         SmartDashboard.putNumber("True Gyro Angle", getGyroYaw().getDegrees());
-        SmartDashboard.putNumber("Angle", getHeading().getDegrees());
+        SmartDashboard.putNumber("Gyro Angle", getHeading().getDegrees());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());

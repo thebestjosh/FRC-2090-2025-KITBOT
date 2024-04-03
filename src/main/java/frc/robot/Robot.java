@@ -16,11 +16,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 // Color Sensor Code 
-import edu.wpi.first.wpilibj.I2C;
+/* import edu.wpi.first.wpilibj.I2C;
 
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ColorSensorV3; */
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -38,11 +38,11 @@ public class Robot extends TimedRobot {
   private SendableChooser<Command> auto;
 
   // Color Sensor Code
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  /*private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch m_colorMatcher = new ColorMatch();
   //Calibrating sensor and defining colors
-  private final Color kOrangeTarget = new Color(0.573, 0.354, 0.078);
+  private final Color kOrangeTarget = new Color(0.573, 0.354, 0.078); */
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     CameraServer.startAutomaticCapture(0);
+    CameraServer.startAutomaticCapture(1);
 
     auto = new SendableChooser<>();
 
@@ -65,7 +66,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("Auto Mode", auto);
 
-    m_colorMatcher.addColorMatch(kOrangeTarget);
+    //m_colorMatcher.addColorMatch(kOrangeTarget);
   }
 
   /**)
@@ -84,32 +85,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
 
     /** Color Sensor Code: */
-    // double IR = m_colorSensor.getIR();
-    // SmartDashboard.putNumber("Red", detectedColor.red);
-    // SmartDashboard.putNumber("Green", detectedColor.green);
-    // SmartDashboard.putNumber("Blue", detectedColor.blue);
-    // SmartDashboard.putNumber("IR", IR);
 
-     // if (match.color == kOrangeTarget) {
-    //   colorString = "Orange";
-    // } else {
-    //   colorString = "Not Orange";
-    // }
-
-    // boolean ringProximity = false; 
-
-
-    // if (proximity>250){
-    //   ringProximity = true;
-     // } else {
-    //   colorString = "Unknown";
-    //   ringProximity = false;
-    // }
-
-    // SmartDashboard.putBoolean("Ring Proximity", ringProximity);
-    // SmartDashboard.putString("Orange", colorString);
-
-    Color detectedColor = m_colorSensor.getColor();
+    /*Color detectedColor = m_colorSensor.getColor();
 
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
@@ -123,7 +100,7 @@ public class Robot extends TimedRobot {
     else 
       ringPresent = false;
 
-    SmartDashboard.putBoolean("Ring Present", ringPresent);
+    SmartDashboard.putBoolean("Ring Present", ringPresent);*/
     
   }
 

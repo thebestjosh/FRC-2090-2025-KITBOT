@@ -77,8 +77,11 @@ public class RobotContainer {
         controls.reverseShooter.whileTrue(new InstantCommand(() -> s_Shooter.reverseShooter()));
         controls.disableCompressor.whileTrue(new InstantCommand(() -> s_Intake.disableCompressor()));
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        controls.hangExtend.whileTrue(s_Hang.runHangUp());
-        controls.hangRetract.whileTrue(s_Hang.runHangDown());
+        controls.hangExtend.whileTrue(new StartEndCommand(
+            () -> s_Hang.runHang(-1), () -> s_Hang.stopHang()));
+        controls.hangRetract.whileTrue(new StartEndCommand(
+            () -> s_Hang.runHang(1), 
+            () -> s_Hang.stopHang()));
         controls.hangNoLimits.onTrue(new InstantCommand(() -> s_Hang.removeHangLimits()));
         controls.breakbeamNoLimits.onTrue(new InstantCommand(() -> s_Intake.removeIntakeLimits()));
         controls.instantHangExtension.onTrue(new InstantHangExtension(s_Hang));
@@ -129,7 +132,7 @@ public class RobotContainer {
     */
     private void configureTriggerBindings() {
         s_Shooter.shooterIsSpunUp.whileTrue(new InstantCommand(() -> s_Blinkin.readyToShootLight()));
-        s_Transfer.noteInTransfer.whileTrue(new InstantCommand(() -> s_Blinkin.noteInTransferLight()));
+        //s_Transfer.noteInTransfer.whileTrue(new InstantCommand(() -> s_Blinkin.noteInTransferLight()));
         s_Intake.noteIntaked.whileTrue(new InstantCommand(() -> s_Blinkin.noteInIntakeLight()));
     }
     

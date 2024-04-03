@@ -12,19 +12,19 @@ import static frc.robot.Constants.Transfer.*;
 
 public class Transfer extends SubsystemBase {
     private final TalonSRX transferController;
-    private final DigitalInput transferBreakbeam;
-    public final Trigger noteInTransfer = new Trigger(this::getBreakbeam);
+    //private final DigitalInput transferBreakbeam;
+    //public final Trigger noteInTransfer = new Trigger(this::getBreakbeam);
 
 
     public Transfer() {
         transferController = new TalonSRX(transferMotorID); 
-        transferBreakbeam = new DigitalInput(3);
+        //transferBreakbeam = new DigitalInput(3);
     }
 
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Transfer Speed", transferController.getMotorOutputPercent());
-        SmartDashboard.putBoolean("Transfer Full", transferBreakbeam.get());
+        //SmartDashboard.putBoolean("Transfer Full", transferBreakbeam.get());
     }
 
     public void runTransfer() {
@@ -39,7 +39,7 @@ public class Transfer extends SubsystemBase {
         transferController.set(ControlMode.PercentOutput, 0);   
     }
 
-    public boolean getBreakbeam() {
-        return transferBreakbeam.get();
-    }
+    // public boolean getBreakbeam() {
+    //     return transferBreakbeam.get();
+    // }
 }
