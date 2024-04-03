@@ -52,6 +52,8 @@ public class GamerLights extends SubsystemBase {
     }
 
 
+    public void idleLight() { blinkin.set(0.53); }
+
     // Method to set the button light color (strobe white)
     public void ampLight() {
         blinkin.set(-0.05); // strobe white color
