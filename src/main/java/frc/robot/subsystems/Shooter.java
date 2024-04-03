@@ -7,11 +7,8 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -19,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.Shooter.*;
-
-import java.util.function.DoubleSupplier;
 
 public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
@@ -100,9 +95,8 @@ public class Shooter extends SubsystemBase {
     public double adjustSpeed(double oldSpeed, double adjuster)
     {
         double workingArea;
-        adjuster = MathUtil.applyDeadband(adjuster, adjustmentDeadband) * -1;
+        adjuster = MathUtil.applyDeadband(-adjuster, adjustmentDeadband);
         workingArea = adjuster > 0 ? maxSpeed - oldSpeed : oldSpeed;
-        return oldSpeed; //my head hurts. I'll finish this later.
-        //
+        return oldSpeed + workingArea*adjuster;
     }
 }
