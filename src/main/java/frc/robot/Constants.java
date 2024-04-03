@@ -136,8 +136,8 @@ public final class Constants {
         public static final double adjustmentDeadband = 0.1;
 
         //It's probably bad cybersec practice to have public variables changeable like this, but is someone really going to hack our robot?
-        public static double ejectSpeed = 0.2;
-        public static double ampSpeed = 0.5;
+        public static double ejectSpeed = 0.3;
+        public static double ampSpeed = 0.4;
         public static  double speakerSpeed = 1;
         public static final double maxSpeed = 1;
     }

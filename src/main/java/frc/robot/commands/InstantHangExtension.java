@@ -33,7 +33,7 @@ public class InstantHangExtension extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_subsystem.leftEncoder <= Constants.Hang.upperLimit + 3 && m_subsystem.rightEncoder <= Constants.Hang.upperLimit + 3){
+    if (m_subsystem.leftEncoder <= Constants.Hang.upperLimit + 5 && m_subsystem.rightEncoder <= Constants.Hang.upperLimit + 5){
       return true;
     }
     return false;
