@@ -3,13 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Timer;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import static frc.robot.Constants.Hang.*;
 
@@ -56,13 +52,13 @@ public class Hang extends SubsystemBase {
             atMaxHeight = true;
         }
 
-        if (atMinHeight && input < 0) {
-            leftHangController.set(maxSpeed * input);
-            rightHangController.set(maxSpeed * input);
+        if (atMinHeight && input > 0) {
+            leftHangController.set(0);
+            rightHangController.set(0);
         }
-        else if (atMaxHeight && input > 0) {
-            leftHangController.set(maxSpeed * input);
-            rightHangController.set(maxSpeed * input);
+        else if (atMaxHeight && input < 0) {
+            leftHangController.set(0);
+            rightHangController.set(0);
         }
         else {
             leftHangController.set(maxSpeed * input);
