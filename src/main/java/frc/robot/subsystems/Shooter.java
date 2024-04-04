@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerR;
     private double velocityL;
     private double velocityR;
-    //Set velocity (look into this): https://pro.docs.ctr-electronics.com/en/stable/docs/migration/migration-guide/closed-loop-guide.html
+    private double spunUpVelocity = speakerSpunUpVelocity;
     public final Trigger shooterIsSpunUp = new Trigger(this::shooterIsSpunUp);
 
     public Shooter() {
@@ -43,6 +43,7 @@ public class Shooter extends SubsystemBase {
     public void runShooter() {
         shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, maxSpeed);
+        spunUpVelocity = maxSpunUpVelocity;
     }
 
     public void runShooterEject() {
@@ -53,11 +54,13 @@ public class Shooter extends SubsystemBase {
     public void runShooterAmp() {
         shooterControllerL.set(ControlMode.PercentOutput, -ampSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, ampSpeed);
+        spunUpVelocity = ampSpunUpVelocity;
     }
 
     public void runShooterSpeaker() {
         shooterControllerL.set(ControlMode.PercentOutput, -speakerSpeed);
         shooterControllerR.set(ControlMode.PercentOutput, speakerSpeed);
+        spunUpVelocity = speakerSpunUpVelocity;
     }
 
     public void stopShooter() {

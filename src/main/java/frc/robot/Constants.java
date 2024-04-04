@@ -132,7 +132,9 @@ public final class Constants {
         public static final int leftMotorID = 21;
         public static final int rightMotorID = 22;
 
-        public static final double spunUpVelocity = 5; //TODO: find actual velocity (in rpm)
+        public static final double speakerSpunUpVelocity = 5; //TODO: find actual velocity (in rpm)
+        public static final double ampSpunUpVelocity = 5; //TODO: find actual velocity (in rpm)
+        public static final double maxSpunUpVelocity = 100; //TODO: find actual velocity (in rpm)
         public static final double adjustmentDeadband = 0.1;
 
         //It's probably bad cybersec practice to have public variables changeable like this, but is someone really going to hack our robot?
