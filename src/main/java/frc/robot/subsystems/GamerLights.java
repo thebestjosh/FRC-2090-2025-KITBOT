@@ -72,8 +72,8 @@ public class GamerLights extends SubsystemBase {
     // Method to set light solid dark green (probably should change this)
     public void shootingDistanceLight() { blinkin.set(0.75); }
 
-    // Method to set light solid red
-    public void noteInIntakeLight() { blinkin.set(0.61); }
+    // Method to set light solid orange
+    public void noteInIntakeLight() { blinkin.set(0.65); }
 
     // Method to set light solid orange
     public void noteInTransferLight() { blinkin.set(0.65); }

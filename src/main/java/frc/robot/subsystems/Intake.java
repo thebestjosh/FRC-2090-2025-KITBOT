@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Intake Speed", intakeSpeed);
+        //SmartDashboard.putNumber("Intake Speed", intakeSpeed);
         SmartDashboard.putBoolean("Compressor Running", m_compressor.isEnabled());
         SmartDashboard.putBoolean("Intake Full", breakbeam.get());
     }
