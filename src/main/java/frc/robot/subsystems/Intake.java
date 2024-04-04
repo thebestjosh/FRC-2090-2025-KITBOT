@@ -92,6 +92,8 @@ public class Intake extends SubsystemBase {
 
     public void disableCompressor() { m_compressor.disable(); }
 
+    public void reenableCompressor() { m_compressor.enable(); }
+
     //i dunno if it works so ill just comment it out for now
     // public void toggleIntake() {
     //     m_doubleSolenoid.toggle();

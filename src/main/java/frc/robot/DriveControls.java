@@ -15,6 +15,7 @@ public class DriveControls {
     public final JoystickButton robotCentric = new JoystickButton(joystick0, 7);
     public final JoystickButton reverseShooter = new JoystickButton(joystick0, 8);
     public final JoystickButton disableCompressor = new JoystickButton(joystick0, 9);
+    public final JoystickButton enableCompressor = new JoystickButton(joystick0, 10);
 
     public final JoystickButton zeroGyro = new JoystickButton(joystick1, 3);
     public final JoystickButton hangExtend = new JoystickButton(joystick1, 6);
