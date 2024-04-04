@@ -76,13 +76,11 @@ public class RobotContainer {
             )
         );
         controls.reverseShooter.whileTrue(new InstantCommand(() -> s_Shooter.reverseShooter()));
-        controls.disableCompressor.whileTrue(new InstantCommand(() -> s_Intake.disableCompressor()));
+        controls.disableCompressor.onTrue(new InstantCommand(() -> s_Intake.disableCompressor()));
+        controls.enableCompressor.onTrue(new InstantCommand(() -> s_Intake.reenableCompressor()));
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        controls.hangExtend.whileTrue(new StartEndCommand(
-            () -> s_Hang.runHang(-1), () -> s_Hang.stopHang()));
-        controls.hangRetract.whileTrue(new StartEndCommand(
-            () -> s_Hang.runHang(1), 
-            () -> s_Hang.stopHang()));
+        controls.hangExtend.whileTrue(s_Hang.runHangUp()); 
+        controls.hangRetract.whileTrue(s_Hang.runHangDown());
         controls.hangNoLimits.onTrue(new InstantCommand(() -> s_Hang.removeHangLimits()));
         controls.breakbeamNoLimits.onTrue(new InstantCommand(() -> s_Intake.removeIntakeLimits()));
         controls.instantHangExtension.onTrue(new InstantHangExtension(s_Hang));

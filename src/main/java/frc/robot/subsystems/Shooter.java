@@ -86,10 +86,8 @@ public class Shooter extends SubsystemBase {
     }
 
     /**
-     * The goal of this method is to modify the speed by the scalar of the joytick, 
-     * relative to the distance from max/min speed (i.e turning adjuster to max 
-     * (1.00) makes speed = 1 and turning to min (-1.00) makes speed = 0), no 
-     * matter what speed is initially (e.g 0.8).
+     * The new objective of this method is to just move the velocity up and down
+     * with the dial.
      * 
      * @param oldSpeed the current set speed
      * @param adjuster the adjustment value
