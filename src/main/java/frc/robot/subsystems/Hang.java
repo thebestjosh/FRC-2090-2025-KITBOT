@@ -45,10 +45,10 @@ public class Hang extends SubsystemBase {
         boolean atMaxHeight = false;
         boolean atMinHeight = false;
 
-        if (leftEncoder > lowerLimit || rightEncoder > lowerLimit) {
+        if ((leftEncoder > lowerLimit || rightEncoder > lowerLimit) && !limits) {
             atMinHeight = true;
         }
-        else if (leftEncoder < upperLimit || rightEncoder < upperLimit) {
+        else if ((leftEncoder < upperLimit || rightEncoder < upperLimit) && !limits) {
             atMaxHeight = true;
         }
 

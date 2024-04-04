@@ -151,6 +151,6 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     Shooter shooter = new Shooter();
-    shooter.runShooter();
+    //shooter.runShooter(0);
   }
 }

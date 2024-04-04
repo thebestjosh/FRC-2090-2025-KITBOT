@@ -6,7 +6,9 @@ import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
@@ -92,7 +94,7 @@ public class RobotContainer {
         controls.engageIntake.whileTrue(new IntakeCommand(s_Intake).alongWith(new StartEndCommand(
             () -> s_Transfer.runTransfer(),
             () -> s_Transfer.stopTransfer())));
-        //controls.spinUpTrapShooter.
+        controls.extendIntake.onTrue(new InstantCommand(() -> s_Intake.extendIntake()));
         controls.spinUpSpeakerShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooterSpeaker(), 
             () -> s_Shooter.stopShooter()));
@@ -114,11 +116,11 @@ public class RobotContainer {
             ));
 
         //Controls not on button map (for debugging)
-        controls.activateShooter.whileTrue(new StartEndCommand(
-            () -> s_Shooter.runShooter(), 
-            () -> s_Shooter.stopShooter()));
+        controls.activateShooter.whileTrue(Commands.runEnd(
+            () -> s_Shooter.runShooter(controls.getShooterAdjustment()), 
+            () -> s_Shooter.stopShooter(),
+            s_Shooter));
         controls.runIntake.whileTrue(new StartEndCommand(() -> s_Intake.runIntake(), () -> s_Intake.stopIntake())); //TODO: test auto intake (collection but no transfer)
-        controls.extenddIntake.onTrue(new InstantCommand(() -> s_Intake.extendIntake()));
         controls.retracttIntake.onTrue(new InstantCommand(() -> s_Intake.retractIntake()));
     }
 
@@ -156,7 +158,9 @@ public class RobotContainer {
         return new PathPlannerAuto("New Auto");
     }
     public Command autoCommandC() {
-        return new PathPlannerAuto("autoC");
+        PathPlannerPath path = PathPlannerPath.fromChoreoTrajectory("autoC1");
+
+        return AutoBuilder.followPath(path);
     }
 
 }

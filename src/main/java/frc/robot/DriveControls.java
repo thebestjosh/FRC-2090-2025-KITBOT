@@ -28,7 +28,7 @@ public class DriveControls {
     public final JoystickButton autoShootSpeaker = new JoystickButton(joystick2, 1);
     public final JoystickButton spinUpAmpShooter = new JoystickButton(joystick2, 2);
     public final JoystickButton engageIntake = new JoystickButton(joystick2, 3);
-    public final JoystickButton spinUpTrapShooter = new JoystickButton(joystick2, 4);
+    public final JoystickButton extendIntake = new JoystickButton(joystick2, 4);
     public final JoystickButton spinUpSpeakerShooter = new JoystickButton(joystick2, 5);
     public final JoystickButton requestAmplification = new JoystickButton(joystick2, 6);
     public final JoystickButton requestCoopertition = new JoystickButton(joystick2, 7);
@@ -38,14 +38,13 @@ public class DriveControls {
     public final JoystickButton runTransfer = new JoystickButton(joystick2, 11);
     
     // These buttons aren't on the button map doc:
-    public final JoystickButton extenddIntake = new JoystickButton(joystick1, 5);
     public final JoystickButton retracttIntake = new JoystickButton(joystick1, 4);
     public final JoystickButton runIntake = new JoystickButton(joystick0, 6);
     public final JoystickButton activateShooter = new JoystickButton(joystick1, 4);
 
     public double getForward() { return joystick0.getY(); } //Deleted a negative symbol to flip directions
     public double getStrafe() { return joystick0.getX(); } //Deleted a negative symbol to flip directions
-    public double getRotation() { return -joystick1.getX(); }  
+    public double getRotation() { return joystick1.getX(); }  
 
     public double getShooterAdjustment() { return joystick2.getZ(); }
 }

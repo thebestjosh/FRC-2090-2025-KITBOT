@@ -140,7 +140,7 @@ public final class Constants {
         //It's probably bad cybersec practice to have public variables changeable like this, but is someone really going to hack our robot?
         public static double ejectSpeed = 0.3;
         public static double ampSpeed = 0.4;
-        public static  double speakerSpeed = 1;
+        public static  double speakerSpeed = 0.8;
         public static final double maxSpeed = 1;
     }
     
@@ -166,7 +166,7 @@ public final class Constants {
         public static final int leftHangID = 21;
         public static final int rightHangID = 20;
 
-        public static final double upperLimit = -20; //previously -49
+        public static final double upperLimit = -35; //previously -49
         public static final double lowerLimit = 0;
 
         public static final double maxSpeed = .4;
