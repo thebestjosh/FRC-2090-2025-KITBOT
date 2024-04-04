@@ -46,6 +46,7 @@ public class RobotContainer {
                 () -> controls.robotCentric.getAsBoolean()
             )
         );
+        //s_Blinkin.setDefaultCommant(new InstantCommand(() -> s_Blinkin.idleLight()));
         configureButtonBindings();
         configureTriggerBindings();
     }
@@ -90,7 +91,9 @@ public class RobotContainer {
         controls.spinUpAmpShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooterAmp(), 
             () -> s_Shooter.stopShooter()));
-        controls.engageIntake.whileTrue(new IntakeCommand(s_Intake));
+        controls.engageIntake.whileTrue(new IntakeCommand(s_Intake)).alongWith(new StartEndCommand(
+            () -> s_Transfer.runTransfer(),
+            () -> s_Transfer.stopTransfer()));
         //controls.spinUpTrapShooter.
         controls.spinUpSpeakerShooter.whileTrue(new StartEndCommand(
             () -> s_Shooter.runShooterSpeaker(), 
