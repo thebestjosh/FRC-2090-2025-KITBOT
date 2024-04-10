@@ -21,7 +21,7 @@ public class Shooter extends SubsystemBase {
     private final TalonSRX shooterControllerL;
     private final TalonSRX shooterControllerR;
     private double velocityL;
-    private double velocityR;
+    //private double velocityR;
     private double spunUpVelocity = speakerSpunUpVelocity;
     public final Trigger shooterIsSpunUp = new Trigger(this::shooterIsSpunUp);
 
@@ -33,10 +33,10 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         //getSelectedSensorVelocity returns ticks per 100ms, so we can just convert to rpm w/ dimensional analysis
-        velocityL = shooterControllerL.getSelectedSensorVelocity() / 4096 * 1000 * 60;
-        velocityR = shooterControllerR.getSelectedSensorVelocity() / 4096 * 1000 * 60;
+        velocityL = shooterControllerL.getSelectedSensorVelocity() / 4096 * 10 * 60;
+        //velocityR = shooterControllerR.getSelectedSensorVelocity() / 4096 * 10 * 60;
         SmartDashboard.putNumber("Shooter Velocity (Left)", velocityL);
-        SmartDashboard.putNumber("Shooter Velocity (Right)", velocityR);
+        //SmartDashboard.putNumber("Shooter Velocity (Right)", velocityR);
     }
 
 
@@ -52,8 +52,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public void runShooterAmp() {
-        shooterControllerL.set(ControlMode.PercentOutput, -ampSpeed);
-        shooterControllerR.set(ControlMode.PercentOutput, ampSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, -ampTopSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, ampBottomSpeed);
         spunUpVelocity = ampSpunUpVelocity;
     }
 
@@ -63,14 +63,19 @@ public class Shooter extends SubsystemBase {
         spunUpVelocity = speakerSpunUpVelocity;
     }
 
+    public void runMaxSpeed() {
+        shooterControllerL.set(ControlMode.PercentOutput, -maxSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, maxSpeed);
+    }
+
     public void stopShooter() {
         shooterControllerL.set(ControlMode.PercentOutput, 0);
         shooterControllerR.set(ControlMode.PercentOutput, 0);
     }
 
     public void reverseShooter() {
-        shooterControllerL.set(ControlMode.PercentOutput, maxSpeed);
-        shooterControllerR.set(ControlMode.PercentOutput, -maxSpeed);
+        shooterControllerL.set(ControlMode.PercentOutput, ejectSpeed);
+        shooterControllerR.set(ControlMode.PercentOutput, -ejectSpeed);
     }
 
     // checks if shooter is ready

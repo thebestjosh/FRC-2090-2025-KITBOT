@@ -12,9 +12,15 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "AutonomousShooter"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "autoA1"
+            "pathName": "autoL1"
           }
         }
       ]

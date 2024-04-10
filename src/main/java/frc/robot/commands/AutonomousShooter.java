@@ -6,21 +6,23 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.Transfer;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class AutoShooter extends Command {
+public class AutonomousShooter extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
   private final Transfer t_subsystem;
-
+  private double timestamp;
+  private boolean finished = false;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoShooter(Shooter shooter, Transfer transfer) {
+  public AutonomousShooter(Shooter shooter, Transfer transfer) {
     m_subsystem = shooter;
     t_subsystem = transfer;
     
@@ -31,6 +33,7 @@ public class AutoShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timestamp = Timer.getFPGATimestamp();
     m_subsystem.runShooterSpeaker();
   }
 
@@ -40,6 +43,9 @@ public class AutoShooter extends Command {
     if (m_subsystem.shooterIsSpunUp())
     {
       t_subsystem.runTransfer();
+    }
+    if (Timer.getFPGATimestamp() - timestamp > 5) {
+      finished = true;
     }
   }
 
@@ -53,6 +59,6 @@ public class AutoShooter extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

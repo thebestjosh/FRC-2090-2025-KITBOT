@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 
@@ -51,6 +52,8 @@ public class RobotContainer {
         //s_Blinkin.setDefaultCommant(new InstantCommand(() -> s_Blinkin.idleLight()));
         configureButtonBindings();
         configureTriggerBindings();
+
+        NamedCommands.registerCommand("AutonomousShooter", getAutonomousShooter());
     }
 
     /**
@@ -77,7 +80,11 @@ public class RobotContainer {
                 () -> controls.robotCentric.getAsBoolean()
             )
         );
-        controls.reverseShooter.whileTrue(new InstantCommand(() -> s_Shooter.reverseShooter()));
+        controls.reverseShooter.whileTrue(new StartEndCommand(
+            () -> s_Shooter.reverseShooter(), 
+            () -> s_Shooter.stopShooter()).alongWith(new StartEndCommand(
+            () -> s_Transfer.reverseTransfer(), 
+            () -> s_Transfer.stopTransfer())));
         controls.disableCompressor.onTrue(new InstantCommand(() -> s_Intake.disableCompressor()));
         controls.enableCompressor.onTrue(new InstantCommand(() -> s_Intake.reenableCompressor()));
         controls.zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
@@ -99,13 +106,17 @@ public class RobotContainer {
             () -> s_Shooter.runShooterSpeaker(), 
             () -> s_Shooter.stopShooter()));
         controls.requestAmplification.whileTrue(new InstantCommand(() -> s_Blinkin.ampLight()));
-        controls.requestCoopertition.whileTrue(new InstantCommand(() -> s_Blinkin.coopertitionLight()));
+        //controls.requestCoopertition.whileTrue(new InstantCommand(() -> s_Blinkin.coopertitionLight()));
         controls.reverseIntake.whileTrue(new StartEndCommand(
             () -> s_Intake.reverseIntake(), 
             () -> s_Intake.stopIntake()));
-        controls.ejectNote.whileTrue(new StartEndCommand(
-            () -> s_Shooter.runShooterEject(), 
-            () -> s_Shooter.stopShooter()));
+        // controls.ejectNote.whileTrue(new StartEndCommand(
+        //     () -> s_Shooter.runShooterEject(), 
+        //     () -> s_Shooter.stopShooter()));
+        controls.ejectNote.whileTrue(Commands.runEnd(
+            () -> s_Shooter.runShooter(controls.getShooterAdjustment()), 
+            () -> s_Shooter.stopShooter(),
+            s_Shooter));
         controls.runTransfer.whileTrue(new StartEndCommand(
             () -> s_Transfer.runTransfer(), 
             () -> s_Transfer.stopTransfer()
@@ -154,13 +165,28 @@ public class RobotContainer {
 
         return AutoBuilder.followPath(path);
     }
+
     public Command getAutoTestCommand() {
         return new PathPlannerAuto("New Auto");
     }
-    public Command autoCommandC() {
-        PathPlannerPath path = PathPlannerPath.fromChoreoTrajectory("autoC1");
 
-        return AutoBuilder.followPath(path);
+    public Command autoCommandL() {
+        return new PathPlannerAuto("autoL");
     }
 
+    public Command autoCommandC() {
+        return new PathPlannerAuto("autoC");
+    }
+
+    public Command autoCommandR() {
+        return new PathPlannerAuto("autoR");
+    }
+
+    public Command getForwardCommand() {
+        return new PathPlannerAuto("ForwardAuto");
+    }
+
+    public Command getAutonomousShooter() {
+        return new AutonomousShooter(s_Shooter, s_Transfer);
+    }
 }

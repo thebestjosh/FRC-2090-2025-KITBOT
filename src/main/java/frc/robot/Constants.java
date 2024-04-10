@@ -78,7 +78,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 4.45; //TODO: This must be tuned to specific robot
         /** Radians per Second */
         public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
 
@@ -92,7 +92,7 @@ public final class Constants {
             public static final int driveMotorID = 10;
             public static final int angleMotorID = 14;
             public static final int canCoderID = 1;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0.1);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-0.3515625);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -102,7 +102,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(64.16);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(59.8);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -112,7 +112,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-172.8);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-175.078125);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -122,25 +122,29 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-42.802734375);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-39.638671875);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
     }
 
     public static final class Shooter {
-        public static final int leftMotorID = 21;
-        public static final int rightMotorID = 22;
+        public static final int leftMotorID = 21; //left is bottom
+        public static final int rightMotorID = 22; //right is top
 
-        public static final double speakerSpunUpVelocity = 5; //TODO: find actual velocity (in rpm)
+        public static final double speakerSpunUpVelocity = 2400; //TODO: find actual velocity (in rpm)
         public static final double ampSpunUpVelocity = 5; //TODO: find actual velocity (in rpm)
         public static final double maxSpunUpVelocity = 100; //TODO: find actual velocity (in rpm)
-        public static final double adjustmentDeadband = 0.1;
+        public static final double adjustmentDeadband = 0.4;
 
         //It's probably bad cybersec practice to have public variables changeable like this, but is someone really going to hack our robot?
         public static double ejectSpeed = 0.3;
-        public static double ampSpeed = 0.4;
+        // public static double ampSpeed = 0.32; //previously 0.4
+        public static double ampTopSpeed = 0.25; //previously 0.4 (L)
+        public static double ampBottomSpeed = 0.38; //previously 0.4 (R)
+
         public static  double speakerSpeed = 0.8;
+
         public static final double maxSpeed = 1;
     }
     

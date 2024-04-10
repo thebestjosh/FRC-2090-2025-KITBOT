@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.commands.AutonomousShooter;
 import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -61,8 +62,11 @@ public class Robot extends TimedRobot {
 
     auto.setDefaultOption("Test Rotate", m_robotContainer.getAutoRotateCommand());
     auto.addOption("Test Drive & Rotate", m_robotContainer.getAutoDriveCommand());
-    auto.addOption("New Auto", m_robotContainer.getAutoTestCommand());
+    auto.addOption("autoL", m_robotContainer.autoCommandL());
     auto.addOption("autoC", m_robotContainer.autoCommandC());
+    auto.addOption("autoR", m_robotContainer.autoCommandR());
+    auto.addOption("Forward", m_robotContainer.getForwardCommand());
+    auto.addOption("Shoot", m_robotContainer.getAutonomousShooter());
 
     SmartDashboard.putData("Auto Mode", auto);
 
