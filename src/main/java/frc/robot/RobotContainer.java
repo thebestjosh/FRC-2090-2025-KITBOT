@@ -49,7 +49,7 @@ public class RobotContainer {
                 () -> controls.robotCentric.getAsBoolean()
             )
         );
-        //s_Blinkin.setDefaultCommant(new InstantCommand(() -> s_Blinkin.idleLight()));
+        //s_Blinkin.setDefaultCommand(new InstantCommand(() -> s_Blinkin.idleLight()));
         configureButtonBindings();
         configureTriggerBindings();
 

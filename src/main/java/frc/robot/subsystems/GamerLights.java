@@ -45,10 +45,10 @@ public class GamerLights extends SubsystemBase {
     public void periodic() {
      
         // check if it's time to toggle the color and reset the timer if needed
-        if (Timer.getFPGATimestamp() - lastToggleTime >= 2 && this.getCurrentCommand() == null) { // Check if 2 seconds have elapsed and nothing else is currently using the lights
+        /*if (Timer.getFPGATimestamp() - lastToggleTime >= 2 && this.getCurrentCommand() == null) { // Check if 2 seconds have elapsed and nothing else is currently using the lights
             toggleColor(); // Toggle the color
             startTimer(); // Reset the timer
-        }
+        } */
     }
 
 
@@ -77,5 +77,10 @@ public class GamerLights extends SubsystemBase {
 
     // Method to set light solid orange
     public void noteInTransferLight() { blinkin.set(0.65); }
+
+    // public Command testIdle()
+    // {
+    //     return new 
+    // }
 
 }
