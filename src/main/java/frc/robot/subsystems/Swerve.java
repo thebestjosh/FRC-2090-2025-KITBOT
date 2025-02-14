@@ -10,10 +10,10 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.kauailabs.navx.frc.AHRS;
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
+// import com.pathplanner.lib.auto.AutoBuilder;
+// import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+// import com.pathplanner.lib.util.PIDConstants;
+// import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -46,26 +46,26 @@ public class Swerve extends SubsystemBase {
 
         swerveOdometry = new SwerveDriveOdometry(swerveKinematics, getGyroYaw(), getModulePositions());
 
-        AutoBuilder.configureHolonomic(
-            this::getPose, // Robot pose supplier
-            this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
-            this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-            this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
-            new HolonomicPathFollowerConfig(new PIDConstants(driveKP, driveKI, driveKD), new PIDConstants(angleKP, angleKI, angleKD),
-             maxSpeed, .413, new ReplanningConfig()),
-            () -> {
-                // Boolean supplier that controls when the path will be mirrored for the red alliance
-                // This will flip the path being followed to the red side of the field.
-                // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+        // AutoBuilder.configureHolonomic(
+        //     this::getPose, // Robot pose supplier
+        //     this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
+        //     this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+        //     this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+        //     new HolonomicPathFollowerConfig(new PIDConstants(driveKP, driveKI, driveKD), new PIDConstants(angleKP, angleKI, angleKD),
+        //      maxSpeed, .413, new ReplanningConfig()),
+        //     () -> {
+        //         // Boolean supplier that controls when the path will be mirrored for the red alliance
+        //         // This will flip the path being followed to the red side of the field.
+        //         // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
 
-                var alliance = DriverStation.getAlliance();
-                if (alliance.isPresent()) {
-                    return alliance.get() == DriverStation.Alliance.Red;
-                }
-                return false;
-            },
-            this // Reference to this subsystem to set requirements
-        );
+        //         var alliance = DriverStation.getAlliance();
+        //         if (alliance.isPresent()) {
+        //             return alliance.get() == DriverStation.Alliance.Red;
+        //         }
+        //         return false;
+        //     },
+        //     this // Reference to this subsystem to set requirements
+        // );
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {

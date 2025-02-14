@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
-import frc.robot.commands.AutonomousShooter;
-import frc.robot.subsystems.Shooter;
+// import frc.robot.commands.AutonomousShooter;
+// import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -60,15 +60,15 @@ public class Robot extends TimedRobot {
 
     auto = new SendableChooser<>();
 
-    auto.setDefaultOption("Test Rotate", m_robotContainer.getAutoRotateCommand());
-    auto.addOption("Test Drive & Rotate", m_robotContainer.getAutoDriveCommand());
-    auto.addOption("autoL", m_robotContainer.autoCommandL());
-    auto.addOption("autoC", m_robotContainer.autoCommandC());
-    auto.addOption("autoR", m_robotContainer.autoCommandR());
-    auto.addOption("Forward", m_robotContainer.getForwardCommand());
-    auto.addOption("Shoot", m_robotContainer.getAutonomousShooter());
+    // auto.setDefaultOption("Test Rotate", m_robotContainer.getAutoRotateCommand());
+    // auto.addOption("Test Drive & Rotate", m_robotContainer.getAutoDriveCommand());
+    // auto.addOption("autoL", m_robotContainer.autoCommandL());
+    // auto.addOption("autoC", m_robotContainer.autoCommandC());
+    // auto.addOption("autoR", m_robotContainer.autoCommandR());
+    // auto.addOption("Forward", m_robotContainer.getForwardCommand());
+    // auto.addOption("Shoot", m_robotContainer.getAutonomousShooter());
 
-    SmartDashboard.putData("Auto Mode", auto);
+    // SmartDashboard.putData("Auto Mode", auto);
 
     //m_colorMatcher.addColorMatch(kOrangeTarget);
   }
@@ -152,9 +152,9 @@ public class Robot extends TimedRobot {
   }
 
   /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {
-    Shooter shooter = new Shooter();
-    //shooter.runShooter(0);
-  }
+  // @Override
+  // public void testPeriodic() {
+  //   Shooter shooter = new Shooter();
+  //   //shooter.runShooter(0);
+  // }
 }
