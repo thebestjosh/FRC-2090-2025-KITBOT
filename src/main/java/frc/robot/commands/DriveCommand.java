@@ -1,34 +1,54 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.CANDriveSubsystem;
+import java.util.function.DoubleSupplier;
 
-public class DriveCommand extends CommandBase {
-    private final DriveSubsystem driveSubsystem;
-    private final Joystick joystick;
+// Command to drive the robot with joystick inputs
+public class DriveCommand extends Command {
+  private final DoubleSupplier xSpeed;
+  private final DoubleSupplier zRotation;
+  private final CANDriveSubsystem driveSubsystem;
 
-    public DriveCommand(DriveSubsystem subsystem, Joystick joystick) {
-        this.driveSubsystem = subsystem;
-        this.joystick = joystick;
-        addRequirements(driveSubsystem); // Ensures this command has control over the drive subsystem
-    }
+  // Constructor. Runs only once when the command is first created.
+  public DriveCommand(
+      DoubleSupplier xSpeed, DoubleSupplier zRotation, CANDriveSubsystem driveSubsystem) {
+    // Save parameters to local variables for use later
+    this.xSpeed = xSpeed;
+    this.zRotation = zRotation;
+    this.driveSubsystem = driveSubsystem;
 
-    @Override
-    public void execute() {
-        double forward = -joystick.getRawAxis(1); // Y-axis for forward/backward
-        double rotation = joystick.getRawAxis(4); // X-axis for turning
+    // Declare subsystems required by this command. This should include any
+    // subsystem this command sets and output of
+    addRequirements(this.driveSubsystem);
+  }
 
-        driveSubsystem.arcadeDrive(forward, rotation);
-    }
+  // Runs each time the command is scheduled.
+  @Override
+  public void initialize() {
+  }
 
-    @Override
-    public void end(boolean interrupted) {
-        driveSubsystem.stop(); // Stop the motors when the command ends
-    }
+  // Runs every cycle while the command is scheduled (~50 times per second)
+  @Override
+  public void execute() {
+    driveSubsystem.driveArcade(xSpeed.getAsDouble(), zRotation.getAsDouble());
+  }
 
-    @Override
-    public boolean isFinished() {
-        return false; // Runs continuously until interrupted
-    }
+  // Runs each time the command ends via isFinished or being interrupted.
+  @Override
+  public void end(boolean isInterrupted) {
+  }
+
+  // Runs every cycle while the command is scheduled to check if the command is
+  // finished
+  @Override
+  public boolean isFinished() {
+    // Return false to indicate that this command never ends. It can be interrupted
+    // by another command needing the same subsystem.
+    return false;
+  }
 }
